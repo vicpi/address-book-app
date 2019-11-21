@@ -3,7 +3,7 @@ import React from 'react'
 function UsersList(props) {
     return (
         <div className="row">
-            <table class="table">
+            <table className="table">
                 <thead>
                     <tr>
                         <th scope="col">Picture</th>
@@ -15,18 +15,18 @@ function UsersList(props) {
                 </thead>
                 <tbody>
                     {props.users.map(user => (
-                        <tr className="align-items-center">
-                            <td>
+                        <tr key={user.login.username}>
+                            <td className="align-middle">
                                 <img src={user.picture.thumbnail} 
                                     className="rounded"
                                     alt="User picture" 
                                     width="48" 
                                     height="48" />
                                 </td>
-                            <td className="align-items-center">{user.name.first}</td>
-                            <td>{user.name.last}</td>
-                            <td>{user.login.username}</td>
-                            <td>{user.email}</td>
+                            <td className="align-middle">{user.name.first}</td>
+                            <td className="align-middle">{user.name.last}</td>
+                            <td className="align-middle">{user.login.username}</td>
+                            <td className="align-middle">{user.email}</td>
                         </tr>
                     ))}
                 </tbody>
