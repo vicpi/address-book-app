@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { API_URL, BATCH_SIZE } from 'config'
 
 export const makeUsersUrl = (nationalities, seed, page) => {
@@ -20,4 +21,25 @@ export const makeUsersUrl = (nationalities, seed, page) => {
     const url = `${API_URL}${queryString}`
     console.log('url', url);
     return url
+}
+
+const delay = (ms) => {
+    return new Promise(resolve => 
+        setTimeout(resolve, ms)
+    )
+}
+
+/**
+ * Wrapper around axios.get method in order to simulate slow network connection
+ * @param {String} url URL
+ */
+export const httpGet = async (url) => {
+    await delay(2000)
+    let response
+    try {
+        response = await axios.get(url)
+    } catch (err) {
+        console.log('HTTP Request Error: ', err, err.stack)
+    }
+    return response
 }
