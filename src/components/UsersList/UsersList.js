@@ -1,13 +1,18 @@
 import React, { useCallback, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { scrollAtTheBottomOfThePage, loadInitialUsers } from 'actions'
 import './UsersList.scss'
 
 function UsersList(props) {
+    const users = useSelector(state => state.users)
+    const dispatch = useDispatch()
     const onScroll = useCallback(() => {
         const threshold = 500
         const bodyHeight = document.body.offsetHeight
         const scrollPosition = window.visualViewport.pageTop + window.visualViewport.height
         if (bodyHeight - scrollPosition < threshold) {
             // load next 50 users
+            dispatch(scrollAtTheBottomOfThePage())
         }
     })
     useEffect(() => {
@@ -17,6 +22,9 @@ function UsersList(props) {
             window.removeEventListener('scroll', onScroll)
         }
     })
+    useEffect(() => {
+        dispatch(loadInitialUsers())
+    }, [])
     return (
         <div className="row">
             <table className="users-table table">
@@ -30,7 +38,7 @@ function UsersList(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.users.map(user => (
+                    {users.map(user => (
                         <tr key={user.login.username}>
                             <td>
                                 <img src={user.picture.thumbnail} 

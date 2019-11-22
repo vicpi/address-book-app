@@ -1,4 +1,4 @@
-import { SET_USERS } from 'actions/index.js'
+import { ADD_USERS } from 'actions/index.js'
 
 const initialState = {
     users: []
@@ -6,9 +6,11 @@ const initialState = {
 
 const globalReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_USERS:
+        case ADD_USERS:
+            console.log('reducer', action.users);
+            
             return {
-                users: action.users
+                users: [ ...state.users, ...action.users]
             }
         default:
             return state
