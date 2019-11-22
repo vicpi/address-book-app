@@ -1,5 +1,5 @@
 import { LOAD_INITIAL_USERS, SCROLL_AT_THE_BOTTOM_OF_THE_PAGE, addUsers } from 'actions'
-import { call, put, takeLatest, all } from 'redux-saga/effects'
+import { call, put, takeLeading, all } from 'redux-saga/effects'
 import axios from 'axios'
 
 function* addUsersSaga() {
@@ -12,13 +12,13 @@ function* addUsersSaga() {
 function* watchScrollAtTheBottomOfThePageSaga() {
     console.log('watchScrollAtTheBottomOfThePageSaga');
     
-    yield takeLatest(SCROLL_AT_THE_BOTTOM_OF_THE_PAGE, addUsersSaga)
+    yield takeLeading(SCROLL_AT_THE_BOTTOM_OF_THE_PAGE, addUsersSaga)
 }
 
 function* watchLoadInitialUsersSaga() {
     console.log('watchLoadInitialUsersSaga');
     
-    yield takeLatest(LOAD_INITIAL_USERS, addUsersSaga)
+    yield takeLeading(LOAD_INITIAL_USERS, addUsersSaga)
 }
 
 export default function* rootSaga() {
