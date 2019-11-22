@@ -6,9 +6,9 @@ html {
 	height: 100%;
 	font-family: 'Helvetica Neue', Helvetica, Arial;
 	font-weight: 300;
-	font-size: 62.5%;
 
 	body {
+		padding-top: 4rem;
 		background-color: $color-background;
 		color: $color-black;
 		height: 100%;
@@ -17,15 +17,6 @@ html {
 			height: 100%;
 			display: flex;
 			flex-direction: column;
-			font-size: 1.6rem;
-
-			h1 {
-				font-weight: $font-light;
-				text-align: center;
-				font-size: 8rem;
-				margin-top: 1rem;
-				margin-bottom: 4rem;
-			}
 		}
 	}
 }

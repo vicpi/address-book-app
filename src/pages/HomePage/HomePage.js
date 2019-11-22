@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Header from 'components/Header/Header'
 import UsersList from 'components/UsersList/UsersList'
 import './HomePage.scss'
 
@@ -13,18 +14,15 @@ function HomePage() {
             })
     }, [])
     return (
-        <div className="container">
-            <header className="header row">
-                <h1>Header</h1>
-            </header>
-            <section className="search row">
-                Users search
-            </section>
-            {users.length > 0 ? <UsersList users={users} /> : null}
-            <footer className="footer row">
-                Footer
-            </footer>
-        </div>
+        <>
+            <Header />
+            <div className="container">
+                {users.length > 0 
+                    ? <UsersList users={users} /> 
+                    : null
+                }
+            </div>
+        </>
     )
 }
 

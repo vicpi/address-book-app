@@ -1,4 +1,5 @@
 import React from 'react'
+import './UsersList.scss'
 
 function UsersList(props) {
     return (
