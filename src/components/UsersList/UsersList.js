@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { scrollAtTheBottomOfThePage, loadInitialUsers } from 'actions'
+import Loading from 'components/Loading/Loading'
 import './UsersList.scss'
 
 function UsersList(props) {
     const users = useSelector(state => state.users)
+    const loading = useSelector(state => state.loading)
     const dispatch = useDispatch()
     const onScroll = useCallback(() => {
         const threshold = 500
@@ -26,36 +28,39 @@ function UsersList(props) {
         dispatch(loadInitialUsers())
     }, [])
     return (
-        <div className="row">
-            <table className="users-table table">
-                <thead>
-                    <tr>
-                        <th scope="col">Picture</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map(user => (
-                        <tr key={user.login.username}>
-                            <td>
-                                <img src={user.picture.thumbnail} 
-                                    className="rounded"
-                                    alt="User picture" 
-                                    width="48" 
-                                    height="48" />
-                                </td>
-                            <td>{user.name.first}</td>
-                            <td>{user.name.last}</td>
-                            <td>{user.login.username}</td>
-                            <td>{user.email}</td>
+        <>
+            <div className="row">
+                <table className="users-table table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Picture</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Email</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        {users.map(user => (
+                            <tr key={user.login.username}>
+                                <td>
+                                    <img src={user.picture.thumbnail} 
+                                        className="rounded"
+                                        alt="User picture" 
+                                        width="48" 
+                                        height="48" />
+                                    </td>
+                                <td>{user.name.first}</td>
+                                <td>{user.name.last}</td>
+                                <td>{user.login.username}</td>
+                                <td>{user.email}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            {loading ? <Loading /> : null}
+        </>
     )
 }
 

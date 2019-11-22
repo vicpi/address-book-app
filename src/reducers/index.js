@@ -1,9 +1,13 @@
-import { ADD_USERS, SET_SEED, SET_PAGE } from 'actions'
+import { 
+    ADD_USERS, SET_SEED, SET_PAGE, 
+    START_LOADING_USERS, FINISH_LOADING_USERS
+} from 'actions'
 
 const initialState = {
     users: [],
     nationalities: ['ch', 'es', 'fr', 'gb'],
-    page: 0
+    page: 0,
+    loading: false
 }
 
 const globalReducer = (state = initialState, action) => {
@@ -22,6 +26,16 @@ const globalReducer = (state = initialState, action) => {
             return {
                 ...state,
                 page: action.page
+            }
+        case START_LOADING_USERS:
+            return {
+                ...state,
+                loading: true
+            }
+        case FINISH_LOADING_USERS:
+            return {
+                ...state,
+                loading: false
             }
         default:
             return state
