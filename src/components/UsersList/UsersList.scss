@@ -1,9 +1,17 @@
-.table {
+.users-table {
     thead {
         tr {
             th {
                 font-weight: bold;
                 border: none;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            td {
+                vertical-align: middle;
             }
         }
     }
