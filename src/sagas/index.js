@@ -1,12 +1,31 @@
-import { LOAD_INITIAL_USERS, SCROLL_AT_THE_BOTTOM_OF_THE_PAGE, addUsers } from 'actions'
-import { call, put, takeLeading, all } from 'redux-saga/effects'
+import { LOAD_INITIAL_USERS, SCROLL_AT_THE_BOTTOM_OF_THE_PAGE, addUsers, setSeed, setPage } from 'actions'
+import { call, put, takeLeading, all, select } from 'redux-saga/effects'
 import axios from 'axios'
+import { makeUsersUrl } from 'helpers'
+
+function* loadInitialUsersSaga() {
+    console.log('loadInitialUsersSaga');
+    const nationalities = yield select(state => state.nationalities)
+    console.log('nationalities', nationalities);
+    
+    const response = yield call(axios.get, makeUsersUrl(nationalities))
+    const users = response.data.results
+    const seed = response.data.info.seed
+    yield put(addUsers(users))
+    yield put(setSeed(seed))
+    yield put(setPage(1))
+}
 
 function* addUsersSaga() {
-    console.log('addUsersSaga');
-    const response = yield call(axios.get, `https://randomuser.me/api/?nat=ch,es,fr,gb&results=50&inc=name,location,nat,email,picture,phone,cell,login`)
+    const nationalities = yield select(state => state.nationalities)
+    const seed = yield select(state => state.seed)
+    const currentPage = yield select(state => state.page)
+    const nextPage = currentPage + 1
+    console.log('addUsersSaga', seed, nextPage);
+    const response = yield call(axios.get, makeUsersUrl(nationalities, seed, nextPage))
     const users = response.data.results
     yield put(addUsers(users))
+    yield put(setPage(nextPage))
 }
 
 function* watchScrollAtTheBottomOfThePageSaga() {
@@ -18,7 +37,7 @@ function* watchScrollAtTheBottomOfThePageSaga() {
 function* watchLoadInitialUsersSaga() {
     console.log('watchLoadInitialUsersSaga');
     
-    yield takeLeading(LOAD_INITIAL_USERS, addUsersSaga)
+    yield takeLeading(LOAD_INITIAL_USERS, loadInitialUsersSaga)
 }
 
 export default function* rootSaga() {
