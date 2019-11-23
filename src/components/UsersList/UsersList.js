@@ -42,7 +42,7 @@ function UsersList() {
                     </thead>
                     <tbody>
                         {users.map(user => (
-                            <tr key={user.login.username}>
+                            <tr key={user.email}>
                                 <td>
                                     <img src={user.picture.thumbnail} 
                                         className="rounded"
