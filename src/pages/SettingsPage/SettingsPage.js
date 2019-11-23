@@ -1,18 +1,14 @@
 import React, { useEffect } from 'react'
+import Header from 'components/Header/Header'
 import './SettingsPage.scss'
 
 function SettingsPage() {
     return (
         <div className="home-page">
-            <header className="header">
-                <h1>Header</h1>
-            </header>
+            <Header />
             <section className="search">
                 Settings Page
             </section>
-            <footer className="footer">
-                Footer
-            </footer>
         </div>
     )
 }

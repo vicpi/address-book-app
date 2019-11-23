@@ -8,7 +8,7 @@ function HomePage() {
         <>
             <Header />
             <div className="container">
-            <UsersList />
+                <UsersList />
             </div>
         </>
     )
