@@ -3,7 +3,7 @@ import {
     addUsers, addUsersToNextPage, setSeed, setPage, 
     startLoadingUsers, finishLoadingUsers
 } from 'actions'
-import { take, put, call, all, select } from 'redux-saga/effects'
+import { take, put, call, all, select, delay } from 'redux-saga/effects'
 import { makeUsersUrl } from 'helpers'
 import request from 'helpers/request'
 
@@ -36,7 +36,11 @@ function* watchLoadNextUsersSaga() {
     while (true) {
         yield take(SCROLL_TO_THE_BOTTOM_OF_THE_PAGE)
         const { nationalities, currentPage, seed } = yield call(selectUserMetaInfo)
-        const nextPageOfUsers = yield select(state => state.nextPage)
+        let nextPageOfUsers = []
+        while (nextPageOfUsers.length === 0) {
+            nextPageOfUsers = yield select(state => state.nextPage)
+            yield delay(500)
+        }
         yield put(addUsers(nextPageOfUsers))
         yield put(setPage(currentPage + 1))
         yield put(startLoadingUsers())
