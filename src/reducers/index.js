@@ -43,7 +43,8 @@ const globalReducer = (state = initialState, action) => {
         case ADD_USERS_TO_NEXT_PAGE:
             return {
                 ...state,
-                nextPage: [...action.users]
+                nextPage: [...action.users],
+                loading: false
             }
         default:
             return state
