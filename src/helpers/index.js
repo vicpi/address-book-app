@@ -18,6 +18,5 @@ export const makeUsersUrl = (nationalities, seed, page) => {
         .map(key => `${key}=${queryParams[key]}`)
         .join('&')
     const url = `${API_URL}${queryString}`
-    console.log('url', url);
     return url
 }

@@ -1,16 +1,16 @@
 import { 
-    ADD_USERS, ADD_USERS_TO_NEXT_PAGE, SET_SEED, SET_PAGE, 
+    ADD_USERS, ADD_NEXT_BATCH_OF_USERS, SET_SEED, SET_PAGE, 
     START_LOADING_USERS, FINISH_LOADING_USERS
 } from 'actions'
 import { BATCH_SIZE, MAX_USERS } from 'config';
 
 const initialState = {
-    users: [],
     nationalities: ['ch', 'es', 'fr', 'gb'],
+    users: [],
+    nextBatchOfUsers: [],
     page: 0,
     pages: Math.floor(MAX_USERS / BATCH_SIZE),
-    loading: false,
-    nextPage: []
+    loading: false
 }
 
 const globalReducer = (state = initialState, action) => {
@@ -40,10 +40,10 @@ const globalReducer = (state = initialState, action) => {
                 ...state,
                 loading: false
             }
-        case ADD_USERS_TO_NEXT_PAGE:
+        case ADD_NEXT_BATCH_OF_USERS:
             return {
                 ...state,
-                nextPage: [...action.users]
+                nextBatchOfUsers: [...action.users]
             }
         default:
             return state

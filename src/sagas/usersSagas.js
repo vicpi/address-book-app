@@ -1,5 +1,5 @@
 import { 
-    addUsers, addUsersToNextPage, 
+    addUsers, addNextBatchOfUsers, 
 } from 'actions'
 import { put, call, select } from 'redux-saga/effects'
 import { makeUsersUrl } from 'helpers'
@@ -27,5 +27,5 @@ export function* loadUsers(nationalities, seed, page) {
 
 export function* prefetchUsers(nationalities, seed, page) {
     const { users } = yield call(fetchUsers, {nationalities, seed, page})
-    yield put(addUsersToNextPage(users))
+    yield put(addNextBatchOfUsers(users))
 }

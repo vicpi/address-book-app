@@ -12,7 +12,7 @@ export function* watchLoadNextUsersSaga() {
         const { nationalities, currentPage, seed } = yield call(selectUserMetaInfo)
         let nextPageOfUsers = []
         while (nextPageOfUsers.length === 0) {
-            nextPageOfUsers = yield select(state => state.nextPage)
+            nextPageOfUsers = yield select(state => state.nextBatchOfUsers)
             yield delay(500)
         }
         yield put(addUsers(nextPageOfUsers))
