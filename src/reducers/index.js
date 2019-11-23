@@ -7,7 +7,8 @@ const initialState = {
     users: [],
     nationalities: ['ch', 'es', 'fr', 'gb'],
     page: 0,
-    loading: false
+    loading: false,
+    nextPage: []
 }
 
 const globalReducer = (state = initialState, action) => {

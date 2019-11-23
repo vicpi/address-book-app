@@ -1,56 +1,54 @@
 import { 
-    LOAD_INITIAL_USERS, SCROLL_AT_THE_BOTTOM_OF_THE_PAGE, 
+    LOAD_INITIAL_USERS, SCROLL_TO_THE_BOTTOM_OF_THE_PAGE, 
     addUsers, setSeed, setPage, 
     startLoadingUsers, finishLoadingUsers
 } from 'actions'
-import { call, put, takeLeading, all, select } from 'redux-saga/effects'
+import { call, take, put, takeLeading, all, select } from 'redux-saga/effects'
 import { makeUsersUrl } from 'helpers'
 import request from 'helpers/request'
 
-function* loadInitialUsersSaga() {
-    console.log('loadInitialUsersSaga');
+function* selectUserMetaInfo() {
     const nationalities = yield select(state => state.nationalities)
-    console.log('nationalities', nationalities);
-    
-    yield put(startLoadingUsers())
-    const response = yield call(request.get, makeUsersUrl(nationalities))
-    const users = response.data.results
-    const seed = response.data.info.seed
-    yield put(addUsers(users))
-    yield put(setSeed(seed))
-    yield put(setPage(1))
-    yield put(finishLoadingUsers())
+    const currentPage = yield select(state => state.page)
+    const seed = yield select(state => state.seed)
+    return { nationalities, currentPage, seed }
 }
 
-function* addUsersSaga() {
-    const nationalities = yield select(state => state.nationalities)
-    const seed = yield select(state => state.seed)
-    const currentPage = yield select(state => state.page)
-    const nextPage = currentPage + 1
-    console.log('addUsersSaga', seed, nextPage);
+function* loadUsers({ nationalities, seed, currentPage }) {
     yield put(startLoadingUsers())
+    const nextPage = currentPage + 1
     const response = yield call(request.get, makeUsersUrl(nationalities, seed, nextPage))
     const users = response.data.results
     yield put(addUsers(users))
     yield put(setPage(nextPage))
+
+    if (seed === undefined) {
+        const seed = response.data.info.seed
+        yield put(setSeed(seed))
+    }
+    
     yield put(finishLoadingUsers())
 }
 
-function* watchScrollAtTheBottomOfThePageSaga() {
-    console.log('watchScrollAtTheBottomOfThePageSaga');
-    
-    yield takeLeading(SCROLL_AT_THE_BOTTOM_OF_THE_PAGE, addUsersSaga)
+function* watchLoadNextUsersSaga() {
+    while (true) {
+        yield take(SCROLL_TO_THE_BOTTOM_OF_THE_PAGE)
+        const { nationalities, currentPage, seed } = yield call(selectUserMetaInfo)
+        yield call(loadUsers, {nationalities, seed, currentPage})
+    }
 }
 
 function* watchLoadInitialUsersSaga() {
-    console.log('watchLoadInitialUsersSaga');
-    
-    yield takeLeading(LOAD_INITIAL_USERS, loadInitialUsersSaga)
+    while (true) {
+        yield take(LOAD_INITIAL_USERS)
+        const { nationalities, currentPage, seed } = yield call(selectUserMetaInfo)
+        yield call(loadUsers, {nationalities, seed, currentPage})
+    }
 }
 
 export default function* rootSaga() {
     yield all([
         watchLoadInitialUsersSaga(),
-        watchScrollAtTheBottomOfThePageSaga()
+        watchLoadNextUsersSaga()
     ])
 }

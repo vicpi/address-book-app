@@ -18,7 +18,7 @@ const delay = (ms) => {
  * @param {String} url URL
  */
 const get = async (url) => {
-    await delay(2000)
+    await delay(1000)
     let response
     try {
         response = await axios.get(url)
