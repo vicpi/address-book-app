@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { scrollAtTheBottomOfThePage, loadInitialUsers, prefetchUsers } from 'actions'
+import { scrollAtTheBottomOfThePage, loadInitialUsers } from 'actions'
 import Loading from 'components/Loading/Loading'
 import './UsersList.scss'
 
@@ -27,9 +27,6 @@ function UsersList() {
     useEffect(() => {
         dispatch(loadInitialUsers())
     }, [])
-    useEffect(() => {
-        dispatch(prefetchUsers())
-    })
     return (
         <>
             <div className="row">

@@ -6,6 +6,7 @@ export const SCROLL_TO_THE_BOTTOM_OF_THE_PAGE = 'SCROLL_TO_THE_BOTTOM_OF_THE_PAG
 export const START_LOADING_USERS = 'START_LOADING_USERS'
 export const FINISH_LOADING_USERS = 'FINISH_LOADING_USERS'
 export const PREFETCH_USERS = 'PREFETCH_USERS'
+export const ADD_USERS_TO_NEXT_PAGE = 'ADD_USERS_TO_NEXT_PAGE'
 
 export const addUsers = (users) => {
     return {
@@ -52,8 +53,9 @@ export const finishLoadingUsers = () => {
     }
 }
 
-export const prefetchUsers = () => {
+export const addUsersToNextPage = (users) => {
     return {
-        type: PREFETCH_USERS
+        type: ADD_USERS_TO_NEXT_PAGE,
+        users
     }
 }

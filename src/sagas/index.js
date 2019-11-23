@@ -1,9 +1,9 @@
 import { 
     LOAD_INITIAL_USERS, SCROLL_TO_THE_BOTTOM_OF_THE_PAGE, 
-    addUsers, setSeed, setPage, 
+    addUsers, addUsersToNextPage, setSeed, setPage, 
     startLoadingUsers, finishLoadingUsers
 } from 'actions'
-import { call, take, put, takeLeading, all, select } from 'redux-saga/effects'
+import { take, put, call, all, select } from 'redux-saga/effects'
 import { makeUsersUrl } from 'helpers'
 import request from 'helpers/request'
 
@@ -14,35 +14,47 @@ function* selectUserMetaInfo() {
     return { nationalities, currentPage, seed }
 }
 
-function* loadUsers({ nationalities, seed, currentPage }) {
-    yield put(startLoadingUsers())
-    const nextPage = currentPage + 1
-    const response = yield call(request.get, makeUsersUrl(nationalities, seed, nextPage))
+function* fetchUsers({ nationalities, seed, page }) {
+    const response = yield call(request.get, makeUsersUrl(nationalities, seed, page))
     const users = response.data.results
-    yield put(addUsers(users))
-    yield put(setPage(nextPage))
+    const currentSeed = response.data.info.seed
+    return { users, currentSeed }
+}
 
-    if (seed === undefined) {
-        const seed = response.data.info.seed
-        yield put(setSeed(seed))
-    }
-    
-    yield put(finishLoadingUsers())
+function* loadUsers(nationalities, seed, page) {
+    const { users, currentSeed } = yield call(fetchUsers, {nationalities, seed, page})
+    yield put(addUsers(users))
+    return currentSeed
+}
+
+function* prefetchUsers(nationalities, seed, page) {
+    const { users } = yield call(fetchUsers, {nationalities, seed, page})
+    yield put(addUsersToNextPage(users))
 }
 
 function* watchLoadNextUsersSaga() {
     while (true) {
         yield take(SCROLL_TO_THE_BOTTOM_OF_THE_PAGE)
         const { nationalities, currentPage, seed } = yield call(selectUserMetaInfo)
-        yield call(loadUsers, {nationalities, seed, currentPage})
+        const nextPageOfUsers = yield select(state => state.nextPage)
+        yield put(addUsers(nextPageOfUsers))
+        yield put(setPage(currentPage + 1))
+        yield put(startLoadingUsers())
+        yield call(prefetchUsers, nationalities, seed, currentPage + 2)
+        yield put(finishLoadingUsers())
     }
 }
 
 function* watchLoadInitialUsersSaga() {
     while (true) {
         yield take(LOAD_INITIAL_USERS)
-        const { nationalities, currentPage, seed } = yield call(selectUserMetaInfo)
-        yield call(loadUsers, {nationalities, seed, currentPage})
+        const { nationalities, currentPage } = yield call(selectUserMetaInfo)
+        yield put(startLoadingUsers())
+        const seed = yield call(loadUsers, nationalities, seed, currentPage + 1)
+        yield put(setPage(currentPage + 1))
+        yield put(setSeed(seed))
+        yield call(prefetchUsers, nationalities, seed, currentPage + 2)
+        yield put(finishLoadingUsers())
     }
 }
 
