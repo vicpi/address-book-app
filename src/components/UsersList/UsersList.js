@@ -9,7 +9,7 @@ function UsersList() {
     const loading = useSelector(state => state.loading)
     const dispatch = useDispatch()
     const onScroll = useCallback(() => {
-        const threshold = 500
+        const threshold = 800
         const bodyHeight = document.body.offsetHeight
         const scrollPosition = window.visualViewport.pageTop + window.visualViewport.height
         if (bodyHeight - scrollPosition < threshold) {
@@ -64,7 +64,7 @@ function UsersList() {
                 </table>
             </div>
             {loading ? <Loading /> : null}
-            {isEndOfUsersCatalog() ? <div className="row">End of users catalog</div> : null}
+            {isEndOfUsersCatalog() ? <p className="row end-catalog">End of users catalog</p> : null}
         </>
     )
 }
