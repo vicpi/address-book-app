@@ -17,9 +17,8 @@ export function* watchLoadNextUsersSaga() {
         }
         yield put(addUsers(nextPageOfUsers))
         yield put(setPage(currentPage + 1))
-        const usersCount = yield select(state => state.users.length)
+        const usersCount = yield select(state => state.allUsers.length)
         const maxUsersCount = yield select(state => state.maxUsersCount)
-        console.log(usersCount, maxUsersCount);
         
         if (usersCount < maxUsersCount) {
             yield put(startLoadingUsers())

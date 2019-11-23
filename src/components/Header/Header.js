@@ -1,4 +1,5 @@
 import React from 'react'
+import Search from 'components/Search/Search'
 import './Header.scss'
 
 const Header = (props) => {
@@ -12,9 +13,7 @@ const Header = (props) => {
                         <a className="nav-link" href="#">Settings</a>
                     </li>
                 </ul>
-                <form className="form-inline">
-                    <input className="search-users-input form-control mr-sm-2" type="search" placeholder="Search by name" aria-label="Search" />
-                </form>
+                <Search />
             </nav>
     )
 }

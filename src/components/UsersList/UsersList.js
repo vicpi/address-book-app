@@ -6,6 +6,7 @@ import './UsersList.scss'
 
 function UsersList() {
     const users = useSelector(state => state.users)
+    const allUsers = useSelector(state => state.allUsers)
     const loading = useSelector(state => state.loading)
     const dispatch = useDispatch()
     const onScroll = useCallback(() => {
@@ -29,8 +30,8 @@ function UsersList() {
     }, [])
     const maxUsersCount = useSelector(state => state.maxUsersCount)
     const isEndOfUsersCatalog = useCallback(() => {
-        return users.length >= maxUsersCount
-    }, [users, maxUsersCount])
+        return allUsers.length >= maxUsersCount
+    }, [allUsers, maxUsersCount])
     return (
         <>
             <div className="row">
