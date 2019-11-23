@@ -27,6 +27,10 @@ function UsersList() {
     useEffect(() => {
         dispatch(loadInitialUsers())
     }, [])
+    const maxUsersCount = useSelector(state => state.maxUsersCount)
+    const isEndOfUsersCatalog = useCallback(() => {
+        return users.length >= maxUsersCount
+    }, [users, maxUsersCount])
     return (
         <>
             <div className="row">
@@ -42,7 +46,7 @@ function UsersList() {
                     </thead>
                     <tbody>
                         {users.map(user => (
-                            <tr key={user.email}>
+                            <tr key={user.login.username + user.email}>
                                 <td>
                                     <img src={user.picture.thumbnail} 
                                         className="rounded"
@@ -60,6 +64,7 @@ function UsersList() {
                 </table>
             </div>
             {loading ? <Loading /> : null}
+            {isEndOfUsersCatalog() ? <div className="row">End of users catalog</div> : null}
         </>
     )
 }

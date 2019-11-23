@@ -17,9 +17,15 @@ export function* watchLoadNextUsersSaga() {
         }
         yield put(addUsers(nextPageOfUsers))
         yield put(setPage(currentPage + 1))
-        yield put(startLoadingUsers())
-        yield call(prefetchUsers, nationalities, seed, currentPage + 2)
-        yield put(finishLoadingUsers())
+        const usersCount = yield select(state => state.users.length)
+        const maxUsersCount = yield select(state => state.maxUsersCount)
+        console.log(usersCount, maxUsersCount);
+        
+        if (usersCount < maxUsersCount) {
+            yield put(startLoadingUsers())
+            yield call(prefetchUsers, nationalities, seed, currentPage + 2)
+            yield put(finishLoadingUsers())
+        }
     }
 }
 

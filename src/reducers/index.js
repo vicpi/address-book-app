@@ -9,7 +9,7 @@ const initialState = {
     users: [],
     nextBatchOfUsers: [],
     page: 0,
-    pages: Math.floor(MAX_USERS / BATCH_SIZE),
+    maxUsersCount: MAX_USERS,
     loading: false
 }
 
@@ -18,7 +18,8 @@ const globalReducer = (state = initialState, action) => {
         case ADD_USERS:
             return {
                 ...state,
-                users: [ ...state.users, ...action.users]
+                users: [ ...state.users, ...action.users],
+                nextBatchOfUsers: []
             }
         case SET_SEED:
             return {
