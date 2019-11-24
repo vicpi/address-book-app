@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { selectUser } from 'actions'
+import './UserRow.scss'
 
 const UserRow = ({ user }) => {
     const dispatch = useDispatch()
@@ -8,7 +9,7 @@ const UserRow = ({ user }) => {
         dispatch(selectUser(user.login.uuid))
     })
     return (
-        <tr key={user.login.uuid} onClick={clickUserHandler}>
+        <tr key={user.login.uuid} className="user-row" onClick={clickUserHandler}>
             <td>
                 <img src={user.picture.thumbnail} 
                     className="rounded"

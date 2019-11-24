@@ -1,0 +1,7 @@
+.user-row {
+    cursor: pointer;
+
+    &:hover {
+        background: rgba(27, 45, 161, 0.1);
+    }
+}
