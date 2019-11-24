@@ -1,8 +1,12 @@
 import { API_URL, BATCH_SIZE } from 'config'
 
 export const makeUsersUrl = (nationalities, seed, page) => {
+    const nationalitiesString = Object.keys(nationalities)
+        .filter(key => nationalities[key].enabled)
+        .map(key => nationalities[key].label)
+        .join(',')
     const queryParams = {
-        nat: nationalities.join(','),
+        nat: nationalitiesString,
         results: BATCH_SIZE,
         inc: [ 
             'name', 'location', 'nat', 'email', 'picture', 'phone', 'cell', 'login'

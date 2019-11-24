@@ -19,12 +19,30 @@ const filterUsers = (users, filterPattern) => {
 }
 
 const initialState = {
-    nationalities: ['ch', 'es', 'fr', 'gb'],
+    nationalities: {
+        ch: {
+            label: 'ch',
+            enabled: true
+        },
+        es: {
+            label: 'es',
+            enabled: true
+        },
+        fr: {
+            label: 'fr',
+            enabled: true
+        },
+        gb: {
+            label: 'gb',
+            enabled: true
+        }
+    },
     users: [],
     allUsers: [],
     nextBatchOfUsers: [],
     page: 0,
-    maxUsersCount: MAX_USERS,
+    batchSize: BATCH_SIZE,
+    maxCatalogLength: MAX_USERS,
     loading: false,
     filterPattern: ''
 }

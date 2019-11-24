@@ -28,10 +28,10 @@ function UsersList() {
     useEffect(() => {
         dispatch(loadInitialUsers())
     }, [])
-    const maxUsersCount = useSelector(state => state.maxUsersCount)
+    const maxCatalogLength = useSelector(state => state.maxCatalogLength)
     const isEndOfUsersCatalog = useCallback(() => {
-        return allUsers.length >= maxUsersCount
-    }, [allUsers, maxUsersCount])
+        return allUsers.length >= maxCatalogLength
+    }, [allUsers, maxCatalogLength])
     return (
         <>
             <div className="row">

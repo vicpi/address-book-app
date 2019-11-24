@@ -18,9 +18,9 @@ export function* watchLoadNextUsersSaga() {
         yield put(addUsers(nextPageOfUsers))
         yield put(setPage(currentPage + 1))
         const usersCount = yield select(state => state.allUsers.length)
-        const maxUsersCount = yield select(state => state.maxUsersCount)
+        const maxCatalogLength = yield select(state => state.maxCatalogLength)
         
-        if (usersCount < maxUsersCount) {
+        if (usersCount < maxCatalogLength) {
             yield put(startLoadingUsers())
             yield call(prefetchUsers, nationalities, seed, currentPage + 2)
             yield put(finishLoadingUsers())
