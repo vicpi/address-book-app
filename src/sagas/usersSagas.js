@@ -1,5 +1,5 @@
 import { 
-    addUsers, addNextBatchOfUsers, 
+    addUsers, addNextBatchOfUsers, clearUsers
 } from 'actions'
 import { put, call, select } from 'redux-saga/effects'
 import { makeUsersUrl } from 'helpers'

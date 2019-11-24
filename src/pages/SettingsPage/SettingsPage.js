@@ -1,32 +1,38 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Header from 'components/Header/Header'
 import './SettingsPage.scss'
 import Checkbox from 'components/Checkbox/Checkbox'
 import NumberInput from 'components/NumberInput/NumberInput'
+import { updateNationalitySettings } from 'actions/settings'
 
 function SettingsPage() {
-    let nationalities = useSelector(state => state.nationalities)
-    let batchSize = useSelector(state => state.batchSize)
-    let maxCatalogLength = useSelector(state => state.maxCatalogLength)
+    const nationalities = useSelector(state => state.nationalities)
+    const batchSize = useSelector(state => state.batchSize)
+    const maxCatalogLength = useSelector(state => state.maxCatalogLength)
+    const dispatch = useDispatch()
 
+    const nationalityChangeHandler = (name, label, checked) => {
+        dispatch(updateNationalitySettings(name, label, checked))
+    }
     return (
         <div className="settings-page container">
             <Header />
             <section className="settings row">
                 <form>
-                    <div className="form-group">
-                        <label htmlFor="checkboxGroup">Nationalities</label>
+                    <fieldset className="form-group">
+                        <legend>Nationalities</legend>
                         <div id="checkboxGroup">
                             {Object.values(nationalities).map(
-                                nationality => <Checkbox key={nationality.label}
-                                                         label={nationality.label.toUpperCase()} 
+                                nationality => <Checkbox key={nationality.name}
+                                                         name={nationality.name} 
+                                                         label={nationality.label} 
                                                          value={nationality.enabled} 
-                                                         onChange={(e) => {}} 
+                                                         onChange={nationalityChangeHandler} 
                                                 />
                             )}
                         </div>
-                    </div>
+                    </fieldset>
                     <NumberInput label="Batch Size" 
                                  placeholder="Please enter number"
                                  value={batchSize}

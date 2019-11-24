@@ -1,7 +1,8 @@
 import { 
-    ADD_USERS, ADD_NEXT_BATCH_OF_USERS, SET_SEED, SET_PAGE, 
-    START_LOADING_USERS, FINISH_LOADING_USERS, FILTER_USERS
+    LOAD_INITIAL_USERS, ADD_USERS, ADD_NEXT_BATCH_OF_USERS, SET_SEED, SET_PAGE, 
+    START_LOADING_USERS, FINISH_LOADING_USERS, CLEAR_USERS, FILTER_USERS,
 } from 'actions'
+import { SET_NATIONALITY_SETTINGS } from 'actions/settings'
 import { BATCH_SIZE, MAX_USERS } from 'config';
 
 const filterUsers = (users, filterPattern) => {
@@ -21,19 +22,23 @@ const filterUsers = (users, filterPattern) => {
 const initialState = {
     nationalities: {
         ch: {
-            label: 'ch',
+            name: 'ch',
+            label: 'CH',
             enabled: true
         },
         es: {
-            label: 'es',
+            name: 'es',
+            label: 'ES',
             enabled: true
         },
         fr: {
-            label: 'fr',
+            name: 'fr',
+            label: 'FR',
             enabled: true
         },
         gb: {
-            label: 'gb',
+            name: 'gb',
+            label: 'GB',
             enabled: true
         }
     },
@@ -88,6 +93,26 @@ const globalReducer = (state = initialState, action) => {
                 ...state,
                 users: filteredUsers,
                 filterPattern: action.searchText
+            }
+        case SET_NATIONALITY_SETTINGS:
+            return {
+                ...state,
+                nationalities: {
+                    ...state.nationalities,
+                    [action.nationalityName]: {
+                        name: action.nationalityName,
+                        label: action.nationalityLabel,
+                        enabled: action.checked
+                    }
+                }
+            }
+        case LOAD_INITIAL_USERS:
+            return {
+                ...state,
+                users: [],
+                allUsers: [],
+                nextBatchOfUsers: [],
+                seed: undefined
             }
         default:
             return state

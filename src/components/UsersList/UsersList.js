@@ -26,7 +26,9 @@ function UsersList() {
         }
     }, [])
     useEffect(() => {
-        dispatch(loadInitialUsers())
+        if (allUsers.length === 0) {
+            dispatch(loadInitialUsers())
+        }
     }, [])
     const maxCatalogLength = useSelector(state => state.maxCatalogLength)
     const isEndOfUsersCatalog = useCallback(() => {

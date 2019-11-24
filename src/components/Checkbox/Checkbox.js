@@ -2,7 +2,7 @@ import React from 'react'
 
 const Checkbox = (props) => {
     const onChange = (e) => {
-        props.onChange && props.onChange(e.target.checked)
+        props.onChange && props.onChange(props.name, props.label, e.target.checked)
     }
     
     return <div className="form-check">

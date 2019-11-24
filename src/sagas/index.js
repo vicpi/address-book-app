@@ -1,9 +1,14 @@
 import { all } from 'redux-saga/effects'
-import { watchLoadInitialUsersSaga, watchLoadNextUsersSaga } from 'sagas/watcherSagas'
+import {
+    watchLoadInitialUsersSaga,
+    watchLoadNextUsersSaga,
+    watchUpdateNationalitySettingsSaga
+} from 'sagas/watcherSagas'
 
 export default function* rootSaga() {
     yield all([
         watchLoadInitialUsersSaga(),
-        watchLoadNextUsersSaga()
+        watchLoadNextUsersSaga(),
+        watchUpdateNationalitySettingsSaga()
     ])
 }

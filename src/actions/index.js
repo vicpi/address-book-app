@@ -1,4 +1,5 @@
 export const ADD_USERS = 'ADD_USERS'
+export const CLEAR_USERS = 'CLEAR_USERS'
 export const SET_SEED = 'SET_SEED'
 export const SET_PAGE = 'SET_PAGE'
 export const LOAD_INITIAL_USERS = 'LOAD_INITIAL_USERS'
@@ -12,6 +13,13 @@ export const FILTER_USERS = 'FILTER_USERS'
 export const addUsers = (users) => {
     return {
         type: ADD_USERS,
+        users
+    }
+}
+
+export const clearUsers = (users) => {
+    return {
+        type: CLEAR_USERS,
         users
     }
 }
