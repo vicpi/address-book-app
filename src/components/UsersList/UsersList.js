@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { scrollAtTheBottomOfThePage, loadInitialUsers } from 'actions'
 import Loading from 'components/Loading/Loading'
+import UserRow from 'components/UserRow/UserRow'
 import './UsersList.scss'
 
 function UsersList() {
@@ -34,6 +35,9 @@ function UsersList() {
     const isEndOfUsersCatalog = useCallback(() => {
         return allUsers.length >= maxCatalogLength
     }, [allUsers, maxCatalogLength])
+    const clickUserHandler = useCallback((user) => {
+
+    })
     return (
         <>
             <div className="row">
@@ -49,19 +53,7 @@ function UsersList() {
                     </thead>
                     <tbody>
                         {users.map(user => (
-                            <tr key={user.login.username + user.email}>
-                                <td>
-                                    <img src={user.picture.thumbnail} 
-                                        className="rounded"
-                                        alt="User picture" 
-                                        width="48" 
-                                        height="48" />
-                                    </td>
-                                <td>{user.name.first}</td>
-                                <td>{user.name.last}</td>
-                                <td>{user.login.username}</td>
-                                <td>{user.email}</td>
-                            </tr>
+                            <UserRow key={user.login.uuid} user={user} />
                         ))}
                     </tbody>
                 </table>

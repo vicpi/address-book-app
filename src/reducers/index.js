@@ -1,6 +1,6 @@
 import { 
     LOAD_INITIAL_USERS, ADD_USERS, ADD_NEXT_BATCH_OF_USERS, SET_SEED, SET_PAGE, 
-    START_LOADING_USERS, FINISH_LOADING_USERS, CLEAR_USERS, FILTER_USERS,
+    START_LOADING_USERS, FINISH_LOADING_USERS, FILTER_USERS, SELECT_USER
 } from 'actions'
 import { SET_NATIONALITY_SETTINGS } from 'actions/settings'
 import { BATCH_SIZE, MAX_USERS } from 'config';
@@ -45,11 +45,13 @@ const initialState = {
     users: [],
     allUsers: [],
     nextBatchOfUsers: [],
+    selectedUser: null,
     page: 0,
     batchSize: BATCH_SIZE,
     maxCatalogLength: MAX_USERS,
     loading: false,
-    filterPattern: ''
+    filterPattern: '',
+    seed: undefined
 }
 
 const globalReducer = (state = initialState, action) => {
@@ -113,6 +115,16 @@ const globalReducer = (state = initialState, action) => {
                 allUsers: [],
                 nextBatchOfUsers: [],
                 seed: undefined
+            }
+        case SELECT_USER:
+            const selectedUser = action.uuid !== null
+                ? state.allUsers.find(
+                    user => user.login.uuid === action.uuid
+                )
+                : null
+            return {
+                ...state,
+                selectedUser
             }
         default:
             return state

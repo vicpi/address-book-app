@@ -9,6 +9,7 @@ export const FINISH_LOADING_USERS = 'FINISH_LOADING_USERS'
 export const PREFETCH_USERS = 'PREFETCH_USERS'
 export const ADD_NEXT_BATCH_OF_USERS = 'ADD_NEXT_BATCH_OF_USERS'
 export const FILTER_USERS = 'FILTER_USERS'
+export const SELECT_USER = 'SELECT_USER'
 
 export const addUsers = (users) => {
     return {
@@ -73,5 +74,12 @@ export const filterUsers = (searchText) => {
     return {
         type: FILTER_USERS,
         searchText
+    }
+}
+
+export const selectUser = (uuid) => {
+    return {
+        type: SELECT_USER,
+        uuid
     }
 }
