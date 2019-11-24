@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Header from 'components/Header/Header'
-import './SettingsPage.scss'
 import Checkbox from 'components/Checkbox/Checkbox'
-import NumberInput from 'components/NumberInput/NumberInput'
 import { updateNationalitySettings } from 'actions/settings'
+import './SettingsPage.scss'
 
 function SettingsPage() {
     const nationalities = useSelector(state => state.nationalities)
-    const batchSize = useSelector(state => state.batchSize)
-    const maxCatalogLength = useSelector(state => state.maxCatalogLength)
     const dispatch = useDispatch()
 
     const nationalityChangeHandler = (name, label, checked) => {
@@ -21,7 +18,7 @@ function SettingsPage() {
             <section className="settings row">
                 <form>
                     <fieldset className="form-group">
-                        <legend>Nationalities</legend>
+                        <legend>Nationality Settings</legend>
                         <div id="checkboxGroup">
                             {Object.values(nationalities).map(
                                 nationality => <Checkbox key={nationality.name}
@@ -33,17 +30,6 @@ function SettingsPage() {
                             )}
                         </div>
                     </fieldset>
-                    <NumberInput label="Batch Size" 
-                                 placeholder="Please enter number"
-                                 value={batchSize}
-                                 onChange={() => {}}
-                    />
-                    <NumberInput label="Max length of catalog" 
-                                 placeholder="Please enter number"
-                                 value={maxCatalogLength}
-                                 onChange={() => {}}
-                    />
-                    <button type="submit" className="btn btn-primary">Save settings</button>
                 </form>
             </section>
         </div>
