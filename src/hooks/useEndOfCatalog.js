@@ -1,9 +1,8 @@
 import { useSelector } from 'react-redux'
-import { allUsersSelector, maxCatalogLengthSelector } from 'selectors'
 
 const useEndOfCatalog = () => {
-    const maxCatalogLength = useSelector(maxCatalogLengthSelector)
-    const allUsers = useSelector(allUsersSelector)
+    const maxCatalogLength = useSelector(state => state.maxCatalogLength)
+    const allUsers = useSelector(state => state.allUsers)
     const isEndOfCatalog = () => {
         return allUsers.length >= maxCatalogLength
     } 
