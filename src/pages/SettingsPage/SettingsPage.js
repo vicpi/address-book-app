@@ -1,17 +1,11 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import Header from 'components/Header/Header'
 import Checkbox from 'components/Checkbox/Checkbox'
-import { updateNationalitySettings } from 'actions/settings'
+import useNationalities from 'hooks/useNationalities'
 import './SettingsPage.scss'
 
 function SettingsPage() {
-    const nationalities = useSelector(state => state.nationalities)
-    const dispatch = useDispatch()
-
-    const nationalityChangeHandler = (name, label, checked) => {
-        dispatch(updateNationalitySettings(name, label, checked))
-    }
+    const [nationalities, nationalityChangeHandler] = useNationalities()
     return (
         <div className="settings-page container">
             <Header />
@@ -19,7 +13,7 @@ function SettingsPage() {
                 <form>
                     <fieldset className="form-group">
                         <legend>Nationality Settings</legend>
-                        <div id="checkboxGroup">
+                        <div>
                             {Object.values(nationalities).map(
                                 nationality => <Checkbox key={nationality.name}
                                                          name={nationality.name} 
