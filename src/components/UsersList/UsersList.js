@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { scrollAtTheBottomOfThePage, loadInitialUsers } from 'actions'
 import Loading from 'components/Loading/Loading'
 import UserRow from 'components/UserRow/UserRow'
+import useEndOfCatalog from 'hooks/useEndOfCatalog'
 import './UsersList.scss'
 
 function UsersList() {
+    console.log('UsersList')
     const users = useSelector(state => state.users)
     const allUsers = useSelector(state => state.allUsers)
     const loading = useSelector(state => state.loading)
@@ -15,7 +17,7 @@ function UsersList() {
         const bodyHeight = document.body.offsetHeight
         const scrollPosition = window.visualViewport.pageTop + window.visualViewport.height
         if (bodyHeight - scrollPosition < threshold) {
-            // load next 50 users
+            // load next batch of users
             dispatch(scrollAtTheBottomOfThePage())
         }
     })
@@ -31,13 +33,7 @@ function UsersList() {
             dispatch(loadInitialUsers())
         }
     }, [])
-    const maxCatalogLength = useSelector(state => state.maxCatalogLength)
-    const isEndOfUsersCatalog = useCallback(() => {
-        return allUsers.length >= maxCatalogLength
-    }, [allUsers, maxCatalogLength])
-    const clickUserHandler = useCallback((user) => {
-
-    })
+    const isEndOfCatalog = useEndOfCatalog()
     return (
         <>
             <div className="row">
@@ -59,7 +55,7 @@ function UsersList() {
                 </table>
             </div>
             {loading ? <Loading /> : null}
-            {isEndOfUsersCatalog() ? <p className="row end-catalog">End of users catalog</p> : null}
+            {isEndOfCatalog() ? <p className="row end-catalog">End of users catalog</p> : null}
         </>
     )
 }
