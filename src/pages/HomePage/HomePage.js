@@ -7,7 +7,7 @@ import './HomePage.scss'
 function HomePage() {
     return (
         <>
-            <Header />
+            <Header showSearch={true} />
             <div className="container">
                 <UsersTable />
                 <UserDetailsModal />

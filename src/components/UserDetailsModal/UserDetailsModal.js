@@ -7,11 +7,11 @@ import './UserDetailsModal.scss'
 const UserDetailsModal = () => {
     const user = useSelector(state => state.selectedUser)
     const dispatch = useDispatch()
-    if (!user) {
-        return null
-    }
     const closeHandler = () => {
         dispatch(selectUser(null))
+    }
+    if (!user) {
+        return null
     }
     return <Modal title="User Details" visible={true} onClose={closeHandler}>
         <div className="row">

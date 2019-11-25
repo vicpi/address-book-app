@@ -14,7 +14,7 @@ const Header = (props) => {
                         <NavLink className="nav-link" to="/settings" exact>Settings</NavLink>
                     </li>
                 </ul>
-                <Search />
+                {props.showSearch ? <Search /> : null}
             </nav>
     )
 }
