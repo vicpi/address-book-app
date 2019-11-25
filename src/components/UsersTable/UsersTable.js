@@ -1,39 +1,19 @@
-import React, { useCallback, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { scrollAtTheBottomOfThePage, loadInitialUsers } from 'actions'
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { scrollAtTheBottomOfThePage } from 'actions'
 import Loading from 'components/Loading/Loading'
 import UserRow from 'components/UserRow/UserRow'
+import './UsersTable.scss'
 import useEndOfCatalog from 'hooks/useEndOfCatalog'
-import './UsersList.scss'
+import { useLoadInitialUsers } from 'hooks/useLoadInitialUsers'
+import { useScrollToTheBottom } from 'hooks/useScrollToTheBottom'
 
-function UsersList() {
-    console.log('UsersList')
-    const users = useSelector(state => state.users)
-    const allUsers = useSelector(state => state.allUsers)
-    const loading = useSelector(state => state.loading)
-    const dispatch = useDispatch()
-    const onScroll = useCallback(() => {
-        const threshold = 800
-        const bodyHeight = document.body.offsetHeight
-        const scrollPosition = window.visualViewport.pageTop + window.visualViewport.height
-        if (bodyHeight - scrollPosition < threshold) {
-            // load next batch of users
-            dispatch(scrollAtTheBottomOfThePage())
-        }
-    })
-    useEffect(() => {
-        window.addEventListener('scroll', onScroll)
-
-        return () => {
-            window.removeEventListener('scroll', onScroll)
-        }
-    }, [])
-    useEffect(() => {
-        if (allUsers.length === 0) {
-            dispatch(loadInitialUsers())
-        }
-    }, [])
+function UsersTable() {
+    useLoadInitialUsers()
+    useScrollToTheBottom(scrollAtTheBottomOfThePage)
     const isEndOfCatalog = useEndOfCatalog()
+    const users = useSelector(state => state.users)
+    const loading = useSelector(state => state.loading)
     return (
         <>
             <div className="row">
@@ -60,4 +40,4 @@ function UsersList() {
     )
 }
 
-export default UsersList
+export default UsersTable

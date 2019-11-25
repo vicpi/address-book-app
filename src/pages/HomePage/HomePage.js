@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from 'components/Header/Header'
-import UsersList from 'components/UsersList/UsersList'
+import UsersTable from 'components/UsersTable/UsersTable'
 import UserDetailsModal from 'components/UserDetailsModal/UserDetailsModal'
 import './HomePage.scss'
 
@@ -9,7 +9,7 @@ function HomePage() {
         <>
             <Header />
             <div className="container">
-                <UsersList />
+                <UsersTable />
                 <UserDetailsModal />
             </div>
         </>
