@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { useCallback, useEffect } from 'react'
 
-export const useScrollToTheBottom = (cb) => {
+const useScrollToTheBottom = (cb) => {
     const dispatch = useDispatch()
     const onScroll = useCallback(() => {
         const threshold = 800
@@ -20,3 +20,5 @@ export const useScrollToTheBottom = (cb) => {
         }
     }, [])
 }
+
+export default useScrollToTheBottom

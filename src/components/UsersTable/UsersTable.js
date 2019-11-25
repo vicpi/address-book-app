@@ -1,12 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { scrollToTheBottomOfThePage } from 'actions'
+import useEndOfCatalog from 'hooks/useEndOfCatalog'
+import useLoadInitialUsers from 'hooks/useLoadInitialUsers'
+import useScrollToTheBottom from 'hooks/useScrollToTheBottom'
 import Loading from 'components/Loading/Loading'
 import UserRow from 'components/UserRow/UserRow'
 import './UsersTable.scss'
-import useEndOfCatalog from 'hooks/useEndOfCatalog'
-import { useLoadInitialUsers } from 'hooks/useLoadInitialUsers'
-import { useScrollToTheBottom } from 'hooks/useScrollToTheBottom'
 
 function UsersTable() {
     useLoadInitialUsers()
