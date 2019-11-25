@@ -24,7 +24,7 @@ function SettingsPage() {
                                 nationality => <Checkbox key={nationality.name}
                                                          name={nationality.name} 
                                                          label={nationality.label} 
-                                                         value={nationality.enabled} 
+                                                         checked={nationality.enabled} 
                                                          onChange={nationalityChangeHandler} 
                                                 />
                             )}
