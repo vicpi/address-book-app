@@ -6,6 +6,7 @@ import useLoadInitialUsers from 'hooks/useLoadInitialUsers'
 import useScrollToTheBottom from 'hooks/useScrollToTheBottom'
 import Loading from 'components/Loading/Loading'
 import UserRow from 'components/UserRow/UserRow'
+import EndOfCatalog from 'components/EndOfCatalog/EndOfCatalog'
 import './UsersTable.scss'
 
 function UsersTable() {
@@ -35,7 +36,7 @@ function UsersTable() {
                 </table>
             </div>
             {loading ? <Loading /> : null}
-            {isEndOfCatalog() ? <p className="row end-catalog">End of users catalog</p> : null}
+            {isEndOfCatalog() ? <EndOfCatalog /> : null}
         </>
     )
 }
