@@ -45,7 +45,7 @@ export const loadInitialUsers = () => {
     }
 }
 
-export const scrollAtTheBottomOfThePage = () => {
+export const scrollToTheBottomOfThePage = () => {
     return {
         type: SCROLL_TO_THE_BOTTOM_OF_THE_PAGE
     }
