@@ -1,0 +1,4 @@
+EndOfCatalog:
+```js
+<EndOfCatalog />
+```
