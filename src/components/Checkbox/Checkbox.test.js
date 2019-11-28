@@ -27,7 +27,6 @@ describe('Checkbox', () => {
         inputElement.simulate('change')
         expect(fn.mock.calls.length).toEqual(1)
         inputElement.simulate('change')
-        console.log(fn.mock.calls);
         
         expect(fn.mock.calls.length).toEqual(2)
         expect(fn.mock.calls[0]).toEqual([ 'ch', 'CH', false ])

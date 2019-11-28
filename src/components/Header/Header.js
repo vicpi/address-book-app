@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import Search from 'components/Search/Search'
 import './Header.scss'
@@ -17,6 +18,10 @@ const Header = (props) => {
                 {props.showSearch ? <Search /> : null}
             </nav>
     )
+}
+
+Header.propTypes = {
+    showSearch: PropTypes.bool
 }
 
 export default Header
