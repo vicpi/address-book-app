@@ -4,9 +4,9 @@ import UsersTable from './UsersTable'
 
 jest.mock('react-redux', () => {
     const exampleUser = require('mocks/exampleUser').default
-    const useSelectorMock = jest.fn()
-    useSelectorMock
-        .mockReturnValue([ exampleUser ])
+    const useSelectorMock = jest.fn(() => {
+        return [ exampleUser ]
+    })
     return {
         useDispatch: () => {},
         useSelector: useSelectorMock
