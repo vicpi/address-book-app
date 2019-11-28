@@ -1,4 +1,6 @@
-@import "common";
+@import "scss/css-reset";
+@import "scss/variables";
+@import "~bootstrap/scss/bootstrap";
 
 html {
 	font-family: 'Helvetica Neue', Helvetica, Arial;
