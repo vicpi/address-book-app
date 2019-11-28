@@ -1,6 +1,6 @@
 Checkbox:
 ```js
-<Checkbox name="ch" label="CH" />
+<Checkbox name="ch" label="CH" checked={false} />
 ```
 
 Checkbox checked:

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { filterUsers } from 'actions'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import './Search.scss'
 
 const Search = () => {
