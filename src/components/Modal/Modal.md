@@ -1,17 +1,26 @@
 Modal with title and text body
 ```js
-(() => {
-    let isModalVisible = false;
-    const showModal = () => {
-        console.log(isModalVisible)
-        isModalVisible = true
-        console.log(isModalVisible)
+class ModalWithTitleAndTextBody extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isModalVisible: false
+        };
+        this.showModal = this.showModal.bind(this)
     }
-    return <div>
-        <button onClick={showModal}>Open Modal</button>
-        <Modal title="Modal Title" visible={isModalVisible}>Text</Modal>
-    </div>
-})()
+    showModal() {
+        console.log(this.state)
+        this.setState({isModalVisible : true})
+    }
+    render() {
+        return <div>
+            <button onClick={this.showModal}>Open Modal</button>
+            <Modal title="Modal Title" visible={this.state.isModalVisible}>Text</Modal>
+        </div>
+    }
+}
+
+<ModalWithTitleAndTextBody />
 ```
 
 Modal with title and arbitrary html
