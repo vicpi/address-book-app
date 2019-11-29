@@ -1,23 +1,24 @@
 Modal with title and text body
 ```js
-class ModalWithTitleAndTextBody extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            isModalVisible: false
-        };
-        this.showModal = this.showModal.bind(this)
+import {useState} from 'react'
+
+function ModalWithTitleAndTextBody() {
+    const [isModalVisible, setModalVisible] = useState(false)
+    const openModal = () => {
+        setModalVisible(true)
     }
-    showModal() {
-        console.log(this.state)
-        this.setState({isModalVisible : true})
+    const closeModal = () => {
+        setModalVisible(false)
     }
-    render() {
-        return <div>
-            <button onClick={this.showModal}>Open Modal</button>
-            <Modal title="Modal Title" visible={this.state.isModalVisible}>Text</Modal>
-        </div>
-    }
+    return <>
+        <button onClick={openModal}>Open Modal</button>
+        <Modal title="Modal Title" 
+               visible={isModalVisible} 
+               onClose={closeModal}
+        >
+            Text
+        </Modal>
+    </>
 }
 
 <ModalWithTitleAndTextBody />
@@ -25,12 +26,32 @@ class ModalWithTitleAndTextBody extends React.Component {
 
 Modal with title and arbitrary html
 ```js
-<Modal title="Modal Title">
-    <div>
-        <input type="text" placeholder="Please enter text here" />
-    </div>
-    <div>
-        <a href="http://google.com/">Link to Google</a>
-    </div>
-</Modal>
+import {useState} from 'react'
+
+function ModalWithArbitraryHtml() {
+    const [isModalVisible, setModalVisible] = useState(false)
+    const openModal = () => {
+        setModalVisible(true)
+    }
+    const closeModal = () => {
+        setModalVisible(false)
+    }
+    return <>
+        <button onClick={openModal}>Open Modal</button>
+        <Modal title="Modal Title" 
+               visible={isModalVisible} 
+               onClose={closeModal}
+        >
+            <h4>Heading</h4>
+            <div>
+                <a href="http://google.com">Link to Google.com</a>
+            </div>
+            <div>
+                <input type="text" placeholder="Text field" />
+            </div>
+        </Modal>
+    </>
+}
+
+<ModalWithArbitraryHtml />
 ```
