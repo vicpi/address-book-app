@@ -23,7 +23,7 @@ const createPortal = (reactElement, cssSelector) => {
  * Modal component with arbitrary children.
  * This component is internally used by ModalWithPortal component.
  * This component should not be used as a standalone component.
- * Instead use ModalWithPortal component.
+ * Please use ModalWithPortal component instead.
  * 
  * @param {Object} props
  * @returns {React.Element}
