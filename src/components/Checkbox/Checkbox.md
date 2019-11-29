@@ -1,9 +1,14 @@
 Checkbox:
 ```js
-<Checkbox name="ch" label="CH" checked={false} />
-```
+import { useState } from 'react'
 
-Checkbox checked:
-```js
-<Checkbox name="ch" label="CH" checked={true} />
+const CheckboxParentComponent = () => {
+    const [checked, setChecked] = useState(false)
+    return <Checkbox name="name"
+                     label="Label"
+                     checked={checked}
+                     onChange={() => setChecked(!checked)} />
+}
+
+<CheckboxParentComponent />
 ```
