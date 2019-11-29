@@ -1,3 +1,6 @@
+/**
+ * Mock used for running unit tests
+ */
 const exampleUser = {
     name:{
         title:'Mademoiselle',
