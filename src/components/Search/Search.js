@@ -3,6 +3,11 @@ import { filterUsers } from 'actions'
 import { useDispatch } from 'react-redux'
 import './Search.scss'
 
+/**
+ * Search component represents a search text field for filtering users
+ * 
+ * @returns {React.Element}
+ */
 const Search = () => {
     const dispatch = useDispatch()
     const [searchText, setSearchText] = useState('')

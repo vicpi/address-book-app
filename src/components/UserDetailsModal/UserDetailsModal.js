@@ -4,6 +4,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectUser } from 'actions'
 import './UserDetailsModal.scss'
 
+/**
+ * Modal that shows user details
+ * 
+ * @returns {React.Element}
+ */
 const UserDetailsModal = () => {
     const user = useSelector(state => state.selectedUser)
     const dispatch = useDispatch()

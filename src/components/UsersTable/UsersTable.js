@@ -9,6 +9,11 @@ import UserRow from 'components/UserRow/UserRow'
 import EndOfCatalog from 'components/EndOfCatalog/EndOfCatalog'
 import './UsersTable.scss'
 
+/**
+ * UsersTable component renders table with the data about users.
+ * 
+ * @returns {React.Element}
+ */
 function UsersTable() {
     useLoadInitialUsers()
     useScrollToTheBottom(scrollToTheBottomOfThePage)

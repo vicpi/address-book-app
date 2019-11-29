@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import './Modal.scss'
 
@@ -18,33 +19,91 @@ const createPortal = (reactElement, cssSelector) => {
     return portal
 }
 
-export const Modal = (props) => {
+/**
+ * Modal component with arbitrary children.
+ * This component is internally used by ModalWithPortal component.
+ * This component should not be used as a standalone component.
+ * Instead use ModalWithPortal component.
+ * 
+ * @param {Object} props
+ * @returns {React.Element}
+ */
+export const Modal = ({visible, title, children, onClose}) => {
     const modalClassName = classnames('modal', {
-        'visible': props.visible
+        'visible': visible
     })
     
-    return <div className={modalClassName} tabIndex="-1" onClick={props.onClose} role="dialog" id="userModal">
+    return <div className={modalClassName} tabIndex="-1" onClick={onClose} role="dialog" id="userModal">
         <div className="modal-dialog" role="document">
             <div className="modal-content">
-                <div className="modal-header">
-                    <h5 className="modal-title">{props.title}</h5>
-                    <button type="button" className="close" aria-label="Close" onClick={props.onClose}>
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+                {
+                    title
+                    ? <div className="modal-header">
+                        <h5 className="modal-title">{title}</h5>
+                        <button type="button" className="close" aria-label="Close" onClick={onClose}>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    : null
+                }
                 <div className="modal-body">
-                    {props.children}
+                    {children}
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn btn-primary" onClick={props.onClose}>Close</button>
+                    <button type="button" className="btn btn-primary" onClick={onClose}>Close</button>
                 </div>
             </div>
         </div>
     </div>
 }
 
+Modal.propTypes = {
+    // indicates whether the modal should be visible
+    visible: PropTypes.bool,
+
+    // modal title
+    title: PropTypes.string,
+
+    // children can be arbitrary JSX, 
+    // they will be rendered inside the Modal body
+    children: PropTypes.element.isRequired,
+
+    // onClose handler is invoked whenever user clicks 
+    // on "Close" button at the bottom of the modal,
+    // on a small "x" icon at the top right,
+    // or on the area outside of the modal
+    onClose: PropTypes.func.isRequired
+}
+
+/**
+ * Component for rendering Modal in a portal.
+ * This is a wrapper around Modal component.
+ * It passes all its props to the underlying Modal component.
+ * This component should be used for creating modals.
+ * 
+ * @param {Object} props
+ * @returns {React.Portal}
+ */
 const ModalWithPortal = (props) => {
     return createPortal(<Modal {...props} />, '#modal-root')
+}
+
+ModalWithPortal.propTypes = {
+    // indicates whether the modal should be visible
+    visible: PropTypes.bool,
+
+    // modal title
+    title: PropTypes.string,
+
+    // children can be arbitrary JSX, 
+    // they will be rendered inside the Modal body
+    children: PropTypes.element.isRequired,
+
+    // onClose handler is invoked whenever user clicks 
+    // on "Close" button at the bottom of the modal,
+    // on a small "x" icon at the top right,
+    // or on the area outside of the modal
+    onClose: PropTypes.func.isRequired
 }
 
 export default ModalWithPortal

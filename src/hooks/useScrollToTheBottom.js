@@ -1,6 +1,12 @@
 import { useDispatch } from 'react-redux'
 import { useCallback, useEffect } from 'react'
 
+/**
+ * Custom hook that checks if user has scrolled to the bottom of the page.
+ * In this case this hook will dispatch an action that was passed to it as an argument.
+ * 
+ * @param {Function} cb Action creator that will be invoked when user scrolls to the bottom of the page
+ */
 const useScrollToTheBottom = (cb) => {
     const dispatch = useDispatch()
     const onScroll = useCallback(() => {
@@ -8,7 +14,6 @@ const useScrollToTheBottom = (cb) => {
         const bodyHeight = document.body.offsetHeight
         const scrollPosition = window.visualViewport.pageTop + window.visualViewport.height
         if (bodyHeight - scrollPosition < threshold) {
-            // load next batch of users
             dispatch(cb())
         }
     })

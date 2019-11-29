@@ -16,6 +16,7 @@ const delay = (ms) => {
  * Wrapper around axios.get method in order to simulate slow network connection
  * 
  * @param {String} url URL
+ * @returns {Response} response - Response object
  */
 const get = async (url) => {
     await delay(2000)

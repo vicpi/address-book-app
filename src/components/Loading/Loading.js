@@ -1,6 +1,11 @@
 import React from 'react'
 import './Loading.scss'
 
+/**
+ * Animated loading spinner
+ * 
+ * @returns {React.Element}
+ */
 const Loading = () => {
     return (
         <div className="loading-container row">
