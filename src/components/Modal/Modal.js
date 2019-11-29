@@ -33,7 +33,13 @@ export const Modal = ({visible, title, children, onClose}) => {
         'visible': visible
     })
     
-    return <div className={modalClassName} tabIndex="-1" onClick={onClose} role="dialog" id="userModal">
+    const closeHandler = (e) => {
+        if (e.target.id === 'userModal') {
+            onClose(e)
+        }
+    }
+    
+    return <div className={modalClassName} tabIndex="-1" onClick={closeHandler} role="dialog" id="userModal">
         <div className="modal-dialog" role="document">
             <div className="modal-content">
                 {
