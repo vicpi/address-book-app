@@ -53,10 +53,10 @@ You can run unit tests using ```npm test``` command. Unit tests are written usin
 
 You can see the documentation by running `npm run docs` command in the terminal.
 
-This command will run the Styleguidist server on a specific port and open the page with the documentation in the browser.
+This command will run the Styleguidist server on port 6060 and open the page with the documentation in the browser.
 
 On this page you can find various React components used in the application, list of their props and how they look like.
 
 ### License
 
-React Start is open source software [licensed as MIT](https://github.com/vicpi/react-start/blob/master/LICENSE).
+[MIT](https://github.com/vicpi/address-book-app/blob/master/LICENSE)
