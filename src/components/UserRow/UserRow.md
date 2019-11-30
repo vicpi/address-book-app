@@ -1,6 +1,5 @@
 Search
 ```js
-() => {
     const exampleUser = {
         name:{
             title:'Mademoiselle',
@@ -43,9 +42,34 @@ Search
             thumbnail:'https://randomuser.me/api/portraits/thumb/women/19.jpg'
         },
         nat:'CH'
-    }
-    console.log(exampleUser)
+    };
 
-    return <UserRow user={exampleUser} />
-}
+
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { createStore } from 'redux';
+import globalReducer from 'reducers/index'
+const store = createStore(
+    globalReducer
+);
+<Provider store={store}>
+    <BrowserRouter>
+        <div style={{filter: 'blur(0px)'}}>
+            <table className="users-table table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Picture</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <UserRow user={exampleUser} />
+                    </tbody>
+                </table>
+        </div>
+    </BrowserRouter>
+</Provider>
 ```
