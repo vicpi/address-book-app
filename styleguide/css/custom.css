@@ -1,0 +1,3 @@
+div[data-testid="preview-wrapper"][data-preview="Header"] div[data-testid="mountNode"] {
+    height: 65px;
+}
