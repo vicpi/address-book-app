@@ -1,4 +1,5 @@
 module.exports = {
+    skipComponentsWithoutExample: true,
     webpackConfig: require('./webpack/client/webpack.dev.config.js'),
     template: {
         head: {

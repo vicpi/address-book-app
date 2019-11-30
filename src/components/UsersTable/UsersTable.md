@@ -1,4 +1,0 @@
-UsersTable:
-```js
-<UsersTable />
-```
