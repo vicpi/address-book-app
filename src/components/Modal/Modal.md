@@ -16,7 +16,7 @@ function ModalWithTitleAndTextBody() {
                visible={isModalVisible} 
                onClose={closeModal}
         >
-            Text
+            <span>Text</span>
         </Modal>
     </>
 }
@@ -42,13 +42,15 @@ function ModalWithArbitraryHtml() {
                visible={isModalVisible} 
                onClose={closeModal}
         >
-            <h4>Heading</h4>
-            <div>
-                <a href="http://google.com">Link to Google.com</a>
-            </div>
-            <div>
-                <input type="text" placeholder="Text field" />
-            </div>
+            <>
+                <h4>Heading</h4>
+                <div>
+                    <a href="http://google.com">Link to Google.com</a>
+                </div>
+                <div>
+                    <input type="text" placeholder="Text field" />
+                </div>
+            </>
         </Modal>
     </>
 }
