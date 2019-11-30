@@ -5,13 +5,10 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { setFeatures } from 'actions'
 import globalReducer from 'reducers'
 import { StaticRouter } from 'react-router';
 import App from 'components/App/App'
 const routes = require('./routes/index')
-
-const FEATURES = require('features')
 
 const app = express()
 const port = 3000
@@ -34,7 +31,6 @@ app.use('/', routes)
 
 app.get('/*', (req, res) => {
     const store = createStore(globalReducer)
-    store.dispatch(setFeatures(FEATURES))
     const context = {};
 
     // Render the component to a string
