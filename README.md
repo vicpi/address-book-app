@@ -6,7 +6,7 @@ Sample address book application, where you can search for users addresses and ot
 
 User data is taken from https://randomuser.me - API that generates random user information.
 
-Here you can find [the requirements](https://github.com/vicpi/react-start/blob/master/REQUIREMENTS) for this application.
+Here you can find [the requirements](https://github.com/vicpi/address-book-app/blob/master/REQUIREMENTS.md) for this application.
 
 ### Tech Stack
 
