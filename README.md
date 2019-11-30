@@ -1,40 +1,62 @@
-# React Start
+# Address Book App
 
-React Start is a convenient starting point for creating React applications.
+### Overview
 
-## Features
+Sample address book application, where you can search for users addresses and other user information.
 
-React Start includes the following:
+User data is taken from https://randomuser.me - API that generates random user information.
 
-- ```React``` - A JavaScript library for building user interfaces. You can find more information about React if you go to their official website [https://reactjs.org](https://reactjs.org).
-- ```Redux``` - A predictable state container for JavaScript apps. You can find more information about Redux if you go to their official website [https://redux.js.org](https://redux.js.org).
-- ```React Router``` - A routing library for React. You can find more information about React Router if you go to their official website [https://reacttraining.com/react-router/web/guides/quick-start](https://reacttraining.com/react-router/web/guides/quick-start).
-- ```Server-side rendering (SSR)``` - This is a popular technique for rendering a normally client-side only single page app (SPA) on the server and then sending a fully rendered page to the client.
-- ```Hot Module Replacement``` - This is a special technique that updates the code on the client without reloading the page. React Hot Loader is used under the hood ([https://github.com/gaearon/react-hot-loader](https://github.com/gaearon/react-hot-loader)).
-- ```Jest``` - A delightful JavaScript Testing Framework with a focus on simplicity. You can find more information about Jest if you go to their official website [https://jestjs.io](https://jestjs.io)
-- `React Styleguidist` - Isolated React component development environment with a living style guide. Link to [official website](https://react-styleguidist.js.org)
+Here you can find [the requirements](https://github.com/vicpi/react-start/blob/master/REQUIREMENTS) for this application.
 
-## Install
+### Tech Stack
+
+- `React`
+- `Redux`
+- `Redux Saga`
+- `React Router`
+- `Jest`
+- `Webpack`
+- `SASS`
+- `React Styleguidist`
+
+### Install
 
 ```sh
-git clone git@github.com:vicpi/react-start.git
-cd react-start
+git clone git@github.com:vicpi/address-book-app.git
+cd address-book-app
 npm install
+```
+
+### Start in development mode
+
+```sh
 npm start
 ```
 
-Then open [http://localhost:3000/](http://localhost:3000/) in your favourite browser.
+This command will build the application in development mode and start the development server on [http://localhost:3000/](http://localhost:3000/).
+It will open the application in your default browser automatically.
 
-## NPM scripts
+### Start in production mode
 
-- ```npm start``` - Run the application in development mode with Server Side Rendering and Hot Module Reloading.
-- ```npm run production``` - Create the minified production build and runs the application in production mode (starts the production server) with Server Side Rendering.
-- ```npm test``` - Run tests using Jest.
-- `npm run docs` - Run React Styleguidist dev server on a separate port.
-- ```npm run dev``` - Run the application in development mode with Hot Module Reloading on the client side and auto-update on the server side.
-- ```npm run dev-ssr``` - The same as ```npm start```.
-- ```npm run build``` - Create the minified production build in the ```dist``` folder.
+```sh
+npm run production
+```
 
-## License
+This command will build the application in production mode and start the Node.js server on [http://localhost:3000/](http://localhost:3000/).
+Then you will need to open [http://localhost:3000/](http://localhost:3000/) in your favourite browser.
+
+### Unit Tests
+
+You can run unit tests using ```npm test``` command. Unit tests are written using Jest.
+
+### Documentation
+
+You can see the documentation by running `npm run docs` command in the terminal.
+
+This command will run the Styleguidist server on a specific port and open the page with the documentation in the browser.
+
+On this page you can find various React components used in the application, list of their props and how they look like.
+
+### License
 
 React Start is open source software [licensed as MIT](https://github.com/vicpi/react-start/blob/master/LICENSE).
