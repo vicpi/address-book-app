@@ -21,6 +21,8 @@ Here you can find [the requirements](https://github.com/vicpi/address-book-app/b
 
 ### Install
 
+First, you need to clone the repository and install project dependencies:
+
 ```sh
 git clone https://github.com/vicpi/address-book-app.git
 cd address-book-app
