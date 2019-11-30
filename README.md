@@ -22,7 +22,7 @@ Here you can find [the requirements](https://github.com/vicpi/address-book-app/b
 ### Install
 
 ```sh
-git clone git@github.com:vicpi/address-book-app.git
+git clone https://github.com/vicpi/address-book-app.git
 cd address-book-app
 npm install
 ```
@@ -34,6 +34,7 @@ npm start
 ```
 
 This command will build the application in development mode and start the development server on [http://localhost:3000/](http://localhost:3000/).
+
 It will open the application in your default browser automatically.
 
 ### Start in production mode
@@ -43,11 +44,14 @@ npm run production
 ```
 
 This command will build the application in production mode and start the Node.js server on [http://localhost:3000/](http://localhost:3000/).
+
 Then you will need to open [http://localhost:3000/](http://localhost:3000/) in your favourite browser.
 
 ### Unit Tests
 
-You can run unit tests using ```npm test``` command. Unit tests are written using Jest.
+You can run unit tests using ```npm test``` command. 
+
+Unit tests are written using Jest.
 
 ### Documentation
 
