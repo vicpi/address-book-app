@@ -11,8 +11,8 @@ const useScrollToTheBottom = (cb) => {
     const dispatch = useDispatch()
     const onScroll = useCallback(() => {
         const threshold = 800
-        const bodyHeight = document.body.offsetHeight
-        const scrollPosition = window.visualViewport.pageTop + window.visualViewport.height
+        const bodyHeight = document.body.clientHeight
+        const scrollPosition = window.scrollY + window.innerHeight
         if (bodyHeight - scrollPosition < threshold) {
             dispatch(cb())
         }
