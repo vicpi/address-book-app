@@ -21,6 +21,8 @@ Here you can find [the requirements](https://github.com/vicpi/address-book-app/b
 - `SASS`
 - `React Styleguidist`
 
+Features: Code splitting, Server side rendering.
+
 ### Install
 
 First, you need to clone the repository and install project dependencies:
