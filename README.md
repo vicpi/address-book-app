@@ -4,6 +4,8 @@
 
 Sample address book application, where you can search for users addresses and other user information.
 
+The application is deployed on [Heroku](https://still-harbor-84129.herokuapp.com/).
+
 User data is taken from https://randomuser.me - API that generates random user information.
 
 Here you can find [the requirements](https://github.com/vicpi/address-book-app/blob/master/REQUIREMENTS.md) for this application.
