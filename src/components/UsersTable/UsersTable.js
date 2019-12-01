@@ -19,7 +19,6 @@ function UsersTable() {
     useScrollToTheBottom(scrollToTheBottomOfThePage)
     const isEndOfCatalog = useEndOfCatalog()
     const users = useSelector(state => state.users)
-    const loading = useSelector(state => state.loading)
     return (
         <>
             <div className="row">
@@ -40,8 +39,7 @@ function UsersTable() {
                     </tbody>
                 </table>
             </div>
-            {loading ? <Loading /> : null}
-            {isEndOfCatalog() ? <EndOfCatalog /> : null}
+            {isEndOfCatalog() ? <EndOfCatalog /> : <Loading />}
         </>
     )
 }
