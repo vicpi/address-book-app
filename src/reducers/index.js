@@ -1,13 +1,12 @@
+import { combineReducers } from 'redux'
 import usersReducer from './users'
 import settingsReducer from './settings'
 import loadingReducer from './loading'
 
-const globalReducer = (state = {}, action) => {
-    return {
-        users: usersReducer(state.users, action),
-        settings: settingsReducer(state.settings, action),
-        loading: loadingReducer(state.loading, action)
-    }
-}
+const globalReducer = combineReducers({
+    users: usersReducer,
+    settings: settingsReducer,
+    loading: loadingReducer
+})
 
 export default globalReducer

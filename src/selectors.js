@@ -1,6 +1,6 @@
 export const nationalitiesSelector = state => state.settings.nationalities
-export const pageSelector = state => state.page
-export const seedSelector = state => state.seed
+export const pageSelector = state => state.users.page
+export const seedSelector = state => state.users.seed
 export const nextBatchSelector = state => state.users.nextBatch
 export const allUsersSelector = state => state.users.all
 export const maxCatalogLengthSelector = state => state.settings.maxCatalogLength
