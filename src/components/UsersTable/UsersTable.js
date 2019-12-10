@@ -8,6 +8,7 @@ import Loading from 'components/Loading/Loading'
 import UserRow from 'components/UserRow/UserRow'
 import EndOfCatalog from 'components/EndOfCatalog/EndOfCatalog'
 import './UsersTable.scss'
+import { filteredUsersSelector, loadingSelector } from '../../selectors'
 
 /**
  * UsersTable component renders table with the data about users.
@@ -17,8 +18,9 @@ import './UsersTable.scss'
 function UsersTable() {
     useLoadInitialUsers()
     useScrollToTheBottom(scrollToTheBottomOfThePage)
+    const loading = useSelector(loadingSelector)
     const isEndOfCatalog = useEndOfCatalog()
-    const users = useSelector(state => state.users)
+    const users = useSelector(filteredUsersSelector)
     return (
         <>
             <div className="row">
@@ -39,7 +41,8 @@ function UsersTable() {
                     </tbody>
                 </table>
             </div>
-            {isEndOfCatalog() ? <EndOfCatalog /> : <Loading />}
+            {loading ? <Loading /> : null}
+            {isEndOfCatalog() ? <EndOfCatalog /> : null}
         </>
     )
 }

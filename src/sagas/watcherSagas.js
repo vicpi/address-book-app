@@ -5,7 +5,8 @@ import {
 } from 'actions'
 import { UPDATE_NATIONALITY_SETTINGS, setNationalitySettings } from 'actions/settings'
 import { take, put, call, select, delay } from 'redux-saga/effects'
-import { selectUserMetaInfo, loadUsers, prefetchUsers } from 'sagas/usersSagas'
+import { selectUserMetaInfo, loadUsers, prefetchUsers } from './usersSagas'
+import { nextBatchSelector, allUsersSelector, maxCatalogLengthSelector } from '../selectors'
 
 export function* watchLoadNextUsersSaga() {
     while (true) {
@@ -13,13 +14,14 @@ export function* watchLoadNextUsersSaga() {
         const { nationalities, currentPage, seed } = yield call(selectUserMetaInfo)
         let nextPageOfUsers = []
         while (nextPageOfUsers.length === 0) {
-            nextPageOfUsers = yield select(state => state.nextBatchOfUsers)
+            nextPageOfUsers = yield select(nextBatchSelector)
             yield delay(500)
         }
         yield put(addUsers(nextPageOfUsers))
         yield put(setPage(currentPage + 1))
-        const usersCount = yield select(state => state.allUsers.length)
-        const maxCatalogLength = yield select(state => state.maxCatalogLength)
+        const allUsers = yield select(allUsersSelector)
+        const usersCount = allUsers.length
+        const maxCatalogLength = yield select(maxCatalogLengthSelector)
         
         if (usersCount < maxCatalogLength) {
             yield put(startLoadingUsers())

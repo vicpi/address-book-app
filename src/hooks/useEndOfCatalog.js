@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { maxCatalogLengthSelector, allUsersSelector } from '../selectors'
 
 /**
  * Custom hook that checks if the user reached the end of the catalog by scrolling down
@@ -6,8 +7,8 @@ import { useSelector } from 'react-redux'
  * @returns {bool} Returns true if maxCatalogLength was reached
  */
 const useEndOfCatalog = () => {
-    const maxCatalogLength = useSelector(state => state.maxCatalogLength)
-    const allUsers = useSelector(state => state.allUsers)
+    const maxCatalogLength = useSelector(maxCatalogLengthSelector)
+    const allUsers = useSelector(allUsersSelector)
     const isEndOfCatalog = () => {
         return allUsers.length >= maxCatalogLength
     } 

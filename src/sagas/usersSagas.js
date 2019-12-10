@@ -1,14 +1,15 @@
 import { 
-    addUsers, addNextBatchOfUsers, clearUsers
+    addUsers, addNextBatchOfUsers
 } from 'actions'
 import { put, call, select } from 'redux-saga/effects'
 import { makeUsersUrl } from 'helpers'
 import request from 'helpers/request'
+import { pageSelector, seedSelector, nationalitiesSelector } from '../selectors'
 
 export function* selectUserMetaInfo() {
-    const nationalities = yield select(state => state.nationalities)
-    const currentPage = yield select(state => state.page)
-    const seed = yield select(state => state.seed)
+    const nationalities = yield select(nationalitiesSelector)
+    const currentPage = yield select(pageSelector)
+    const seed = yield select(seedSelector)
     return { nationalities, currentPage, seed }
 }
 
