@@ -72,7 +72,7 @@ Modal.propTypes = {
 
     // children can be arbitrary JSX, 
     // they will be rendered inside the Modal body
-    children: PropTypes.element.isRequired,
+    children: PropTypes.array.isRequired,
 
     // onClose handler is invoked whenever user clicks 
     // on "Close" button at the bottom of the modal,
@@ -103,7 +103,7 @@ ModalWithPortal.propTypes = {
 
     // children can be arbitrary JSX, 
     // they will be rendered inside the Modal body
-    children: PropTypes.element.isRequired,
+    children: PropTypes.array.isRequired,
 
     // onClose handler is invoked whenever user clicks 
     // on "Close" button at the bottom of the modal,
