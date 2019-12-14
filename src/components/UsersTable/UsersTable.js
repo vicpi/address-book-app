@@ -15,7 +15,7 @@ import { filteredUsersSelector, loadingSelector } from '../../selectors'
  * 
  * @returns {React.Element}
  */
-function UsersTable() {
+const UsersTable = React.memo(() => {
     useLoadInitialUsers()
     useScrollToTheBottom(scrollToTheBottomOfThePage)
     const loading = useSelector(loadingSelector)
@@ -45,6 +45,6 @@ function UsersTable() {
             {isEndOfCatalog() ? <EndOfCatalog /> : null}
         </>
     )
-}
+})
 
 export default UsersTable

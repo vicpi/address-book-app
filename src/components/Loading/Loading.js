@@ -6,7 +6,7 @@ import './Loading.scss'
  * 
  * @returns {React.Element}
  */
-const Loading = () => {
+const Loading = React.memo(() => {
     return (
         <div className="loading-container row">
             <div className="loading spinner-border">
@@ -14,6 +14,6 @@ const Loading = () => {
             </div>
         </div>
     )
-}
+})
 
 export default Loading

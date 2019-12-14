@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
@@ -28,16 +28,16 @@ const createPortal = (reactElement, cssSelector) => {
  * @param {Object} props
  * @returns {React.Element}
  */
-export const Modal = ({visible, title, children, onClose}) => {
+export const Modal = React.memo(({visible, title, children, onClose}) => {
     const modalClassName = classnames('modal', {
         'visible': visible
     })
     
-    const closeHandler = (e) => {
+    const closeHandler = useCallback((e) => {
         if (e.target.id === 'userModal') {
             onClose(e)
         }
-    }
+    })
     
     return <div className={modalClassName} tabIndex="-1" onClick={closeHandler} role="dialog" id="userModal">
         <div className="modal-dialog" role="document">
@@ -61,7 +61,7 @@ export const Modal = ({visible, title, children, onClose}) => {
             </div>
         </div>
     </div>
-}
+})
 
 Modal.propTypes = {
     // indicates whether the modal should be visible

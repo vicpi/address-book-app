@@ -10,7 +10,7 @@ import './Header.scss'
  * @param {Object} props
  * @returns {React.Element}
  */
-const Header = (props) => {
+const Header = React.memo((props) => {
     return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <ul className="navbar-nav mr-auto">
@@ -24,7 +24,7 @@ const Header = (props) => {
                 {props.showSearch ? <Search /> : null}
             </nav>
     )
-}
+})
 
 Header.propTypes = {
     // indicates whether to show search field

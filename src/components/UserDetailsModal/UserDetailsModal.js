@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import Modal from 'components/Modal/Modal'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectUser } from 'actions'
@@ -10,12 +10,12 @@ import { selectedUserSelector } from '../../selectors'
  * 
  * @returns {React.Element}
  */
-const UserDetailsModal = () => {
+const UserDetailsModal = React.memo(() => {
     const user = useSelector(selectedUserSelector)
     const dispatch = useDispatch()
-    const closeHandler = () => {
+    const closeHandler = useCallback(() => {
         dispatch(selectUser(null))
-    }
+    })
     if (!user) {
         return null
     }
@@ -65,6 +65,6 @@ const UserDetailsModal = () => {
             <div className="col">{user.cell}</div>
         </div>
     </Modal>
-}
+})
 
 export default UserDetailsModal

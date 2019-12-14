@@ -8,7 +8,7 @@ import './Search.scss'
  * 
  * @returns {React.Element}
  */
-const Search = () => {
+const Search = React.memo(() => {
     const dispatch = useDispatch()
     const [searchText, setSearchText] = useState('')
     const onChange = useCallback((e) => {
@@ -27,6 +27,6 @@ const Search = () => {
             />
         </form>
     )
-}
+})
 
 export default Search

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 
 /**
@@ -9,10 +9,10 @@ import PropTypes from 'prop-types'
  * @param {Object} props
  * @returns {React.Element}
  */
-const Checkbox = ({ name, label, checked, onChange }) => {
-    const changeHandler = (e) => {
+const Checkbox = React.memo(({ name, label, checked, onChange }) => {
+    const changeHandler = useCallback((e) => {
         onChange && onChange(name, label, e.target.checked)
-    }
+    })
     
     return <div className="form-check">
         <input type="checkbox"
@@ -27,7 +27,7 @@ const Checkbox = ({ name, label, checked, onChange }) => {
             {label}
         </label>
     </div>
-}
+})
 
 Checkbox.propTypes = {
     // name is used for providing an id to the underlying input

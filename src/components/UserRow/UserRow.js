@@ -11,7 +11,7 @@ import './UserRow.scss'
  * @param {Object} props
  * @returns {React.Element}
  */
-const UserRow = ({ user }) => {
+const UserRow = React.memo(({ user }) => {
     const dispatch = useDispatch()
     const clickUserHandler = useCallback(() => {
         dispatch(selectUser(user.login.uuid))
@@ -31,7 +31,7 @@ const UserRow = ({ user }) => {
             <td>{user.email}</td>
         </tr>
     )
-}
+})
 
 UserRow.propTypes = {
     // Object representing the user
