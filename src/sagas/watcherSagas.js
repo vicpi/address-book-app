@@ -1,16 +1,21 @@
+import { buffers } from 'redux-saga'
 import { 
     LOAD_INITIAL_USERS, SCROLL_TO_THE_BOTTOM_OF_THE_PAGE, 
     addUsers, setSeed, setPage, loadInitialUsers,
     startLoadingUsers, finishLoadingUsers
 } from 'actions'
 import { UPDATE_NATIONALITY_SETTINGS, setNationalitySettings } from 'actions/settings'
-import { take, put, call, select, delay } from 'redux-saga/effects'
+import { take, put, call, select, delay, actionChannel } from 'redux-saga/effects'
 import { selectUserMetaInfo, loadUsers, prefetchUsers } from './usersSagas'
 import { nextBatchSelector, allUsersSelector, maxCatalogLengthSelector } from '../selectors'
 
 export function* watchLoadNextUsersSaga() {
+    const scrollChannel = yield actionChannel(
+        SCROLL_TO_THE_BOTTOM_OF_THE_PAGE,
+        buffers.sliding(1)
+    )
     while (true) {
-        yield take(SCROLL_TO_THE_BOTTOM_OF_THE_PAGE)
+        yield take(scrollChannel)
         const { nationalities, currentPage, seed } = yield call(selectUserMetaInfo)
         let nextPageOfUsers = []
         while (nextPageOfUsers.length === 0) {
