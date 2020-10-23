@@ -1,4 +1,6 @@
-# Address Book App Requirements
+# Address Book App
+
+This is a fictional address book app, where you can search for users addresses and personal information. The app should display a list of users for clients to browse and get personal information for a selected user.
 
 ### Home page (browse with search)
 
